@@ -106,6 +106,11 @@ func main() {
 		fmt.Println(hash)
 		done = false
 		password = ""
+		func() {
+			f, _ := os.Create(fmt.Sprintf("/tmp/bcrypt_history_%s.txt\n", hash[7:13]))
+			f.Write([]byte(hash))
+			f.Close()
+		}()
 		Run(salt, hash, thread)
 		if password != "" {
 			f, _ := os.Create(fmt.Sprintf("/tmp/bCrypt_%s.txt\n", hash[7:13]))
