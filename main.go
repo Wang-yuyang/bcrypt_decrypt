@@ -107,13 +107,13 @@ func main() {
 		done = false
 		password = ""
 		func() {
-			f, _ := os.Create(fmt.Sprintf("/tmp/bcrypt_history_%s.txt\n", hash[7:13]))
+			f, _ := os.Create(fmt.Sprintf("/tmp/bcrypt_history_%v.txt", time.Now().Unix()))
 			f.Write([]byte(hash))
 			f.Close()
 		}()
 		Run(salt, hash, thread)
 		if password != "" {
-			f, _ := os.Create(fmt.Sprintf("/tmp/bCrypt_%s.txt\n", hash[7:13]))
+			f, _ := os.Create(fmt.Sprintf("/tmp/bCrypt_%s.txt", hash[7:13]))
 			f.Write([]byte(password[:len(password)-len(salt)]))
 			f.Close()
 			if debug {
